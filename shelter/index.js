@@ -176,8 +176,25 @@ body.addEventListener('click', (event) => {
      card.appendChild(name);
      card.appendChild(button);
      
- 
+     const modalContainer = document.querySelectorAll(".slider__card");
+     modalContainer.forEach(card => {
+         card.addEventListener("click", (event) => {
+             const target = event.target;
+
+             const modalBtnElement = target.closest("[data-modal-btn]");
+
+             const name = modalBtnElement.dataset.modalBtn;
+
+             const modal = document.querySelector(`[data-modal-window='${name}']`);
+
+                 modal.style.display = "flex";
+                 document.body.style.overflow = "hidden";
+
+         });
+     });
+
      return card;
+
  }
  
 
@@ -266,23 +283,7 @@ body.addEventListener('click', (event) => {
     });
     
 
-    
-        const modalContainer = document.querySelectorAll(".slider__card");
-        modalContainer.forEach(card => {
-            card.addEventListener("click", (event) => {
-                const target = event.target;
 
-                const modalBtnElement = target.closest("[data-modal-btn]");
-
-                const name = modalBtnElement.dataset.modalBtn;
-
-                const modal = document.querySelector(`[data-modal-window='${name}']`);
-    
-                    modal.style.display = "flex";
-                    document.body.style.overflow = "hidden";
-    
-            });
-        });
 
 
 
