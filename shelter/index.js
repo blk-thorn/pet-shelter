@@ -188,6 +188,7 @@ body.addEventListener('click', (event) => {
              const modal = document.querySelector(`[data-modal-window='${name}']`);
 
                  modal.style.display = "flex";
+                 body.classList.toggle('noscroll');
                  document.body.style.overflow = "hidden";
 
          });
@@ -212,7 +213,24 @@ body.addEventListener('click', (event) => {
          }
      }
  }
- 
+
+ const screenWidth = window.innerWidth;
+
+ if (screenWidth >= 768 && screenWidth <= 1279) {
+     addUniqueCards(activeCards, 2);
+     addUniqueCards(leftCards, 2);
+     addUniqueCards(rightCards, 2);
+ } else if (screenWidth < 768 && screenWidth >= 320) {
+     addUniqueCards(activeCards, 1);
+     addUniqueCards(leftCards, 1);
+     addUniqueCards(rightCards, 1);
+ } else {
+     addUniqueCards(activeCards, 3);
+     addUniqueCards(leftCards, 3);
+     addUniqueCards(rightCards, 3);
+ }
+
+
 //  function addUniqueCards(container, count, usedIndices) {
 //     while (usedIndices.size < count) {
 //         const index = Math.floor(Math.random() * shuffledArr.length);
@@ -224,14 +242,7 @@ body.addEventListener('click', (event) => {
 //     }
 // }
 
- addUniqueCards(activeCards, 3);
- addUniqueCards(leftCards, 3);
- addUniqueCards(rightCards, 3);
 
-
-
-    const sliderWrapper = document.querySelector(".slider__wrapper")
-    const cards = document.querySelectorAll(".slider__card").innerHTML;
     const prevBtn = document.querySelector(".slider__btn--left");
     const nextBtn = document.querySelector(".slider__btn--right");
 
@@ -253,36 +264,68 @@ body.addEventListener('click', (event) => {
 
     // const usedLeftIndices = new Set();
     // const usedRightIndices = new Set();
-    
-    slider.addEventListener("animationend", (animationEvent) => {
-        let changedCards;
-    
-        if (animationEvent.animationName === "move-left") {
-            slider.classList.remove("transition-left");
-            changedCards = leftCards;
-            activeCards.innerHTML = changedCards.innerHTML;
-    
-            changedCards.innerHTML = "";
-    
-            addUniqueCards(leftCards, 3);
-            // addUniqueCards(leftCards, 3, usedLeftIndices);
-    
-        } else {
-            slider.classList.remove("transition-right");
-            changedCards = rightCards;
-            activeCards.innerHTML = changedCards.innerHTML;
-    
-            changedCards.innerHTML = "";
-    
-            addUniqueCards(rightCards, 3);
-            // addUniqueCards(rightCards, 3, usedRightIndices);
-        }
-    
-        prevBtn.addEventListener('click', moveLeft);
-        nextBtn.addEventListener('click', moveRight);
-    });
-    
+    let currentCardCount;
 
+
+function updateCardCount() {
+    if (screenWidth < 768 && screenWidth >= 320) {
+        currentCardCount = 1;
+    } else if (screenWidth >= 768 && screenWidth <= 1279) {
+        currentCardCount = 2;
+    } else {
+        currentCardCount = 3;
+    }
+}
+
+slider.addEventListener("animationend", (animationEvent) => {
+    let changedCards;
+    updateCardCount();
+
+    if (animationEvent.animationName === "move-left") {
+        slider.classList.remove("transition-left");
+        changedCards = leftCards;
+        activeCards.innerHTML = changedCards.innerHTML;
+
+        changedCards.innerHTML = "";
+
+        addUniqueCards(leftCards, currentCardCount);
+    } else {
+        slider.classList.remove("transition-right");
+        changedCards = rightCards;
+        activeCards.innerHTML = changedCards.innerHTML;
+
+        changedCards.innerHTML = "";
+
+        addUniqueCards(rightCards, currentCardCount);
+    }
+
+    prevBtn.addEventListener('click', moveLeft);
+    nextBtn.addEventListener('click', moveRight);
+});
+    
+    const mediaQueryMobile = window.matchMedia('(min-width: 320px) and (max-width: 767px)');
+    const mediaQueryTablet = window.matchMedia('(min-width: 768px) and (max-width: 1279px)');
+
+    function updateCardDisplay() {
+        updateCardCount();
+        addUniqueCards(currentCardCount);
+    }
+
+    function handleMediaQueryChange() {
+        console.log('Ширина:', window.innerWidth);
+
+        if (mediaQueryMobile.matches) {
+            updateCardDisplay();
+        } else if (mediaQueryTablet.matches) {
+            updateCardDisplay();
+        } else {
+            console.log('error');
+        }
+    }
+
+    window.addEventListener('resize', handleMediaQueryChange);
+
+    handleMediaQueryChange();
 
 
 

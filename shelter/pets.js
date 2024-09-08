@@ -67,7 +67,18 @@ function mixArr () {
 
 const postData = petsArr;
 let currentPage = 1;
-const petCards = 8; 
+
+function getPetsCards() {
+    const windowWidth = window.innerWidth;
+
+    if (windowWidth <= 320) {
+        return 3;
+    } else if (windowWidth <= 768) {
+        return 6;
+    } else {
+        return 8;
+    }
+}
 
 function displayList(arrData, petsPerPage, page) {
     const postsEl = document.querySelector(".cards__container");
@@ -191,6 +202,7 @@ modalContainer.forEach(card => {
             const name = modalBtnElement.dataset.modalBtn;
             const modal = document.querySelector(`[data-modal-window='${name}']`);
             modal.style.display = "flex";
+            body.classList.toggle('noscroll');
             document.body.style.overflow = "hidden";
 
             const closeBtn = modal.querySelector(".modal__button");
@@ -231,7 +243,9 @@ function displayPagination(arrData, petsPerPage) {
     }
 }
 
+
 function handleNextBtn() {
+    const petCards = getPetsCards();
     const totalPages = Math.ceil(postData.length / petCards);
     if (currentPage < totalPages) {
         currentPage++;
@@ -243,6 +257,7 @@ function handleNextBtn() {
 }
 
 function handlePrevBtn() {
+    const petCards = getPetsCards();
     if (currentPage > 1) {
         currentPage--;
     }
@@ -252,6 +267,7 @@ function handlePrevBtn() {
     displayPagination(postData, petCards);
 }
 function handleLastBtn() {
+    const petCards = getPetsCards();
     const totalPages = Math.ceil(postData.length / petCards);
     if (currentPage < totalPages) {
         currentPage = totalPages;
@@ -263,6 +279,7 @@ function handleLastBtn() {
 }
 
 function handleFirstBtn() {
+    const petCards = getPetsCards();
     if (currentPage > 1) {
         currentPage = 1;
     }
@@ -284,8 +301,20 @@ btnLast.addEventListener("click", handleLastBtn);
 btnFirst.addEventListener("click", handleFirstBtn);
 
 
-displayList(postData, petCards, currentPage);
-displayPagination(postData, petCards);
+function initializeDisplay() {
+    const petCards = getPetsCards();
+    displayList(postData, petCards, currentPage);
+    displayPagination(postData, petCards);
+}
+
+
+initializeDisplay();
+
+window.addEventListener('resize', () => {
+    const petCards = getPetsCards();
+    displayList(postData, petCards, currentPage);
+});
+
 
 
 window.onclick = function (e) {
