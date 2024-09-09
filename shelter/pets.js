@@ -23,7 +23,7 @@ if (menu && menuBtn) {
 			menuBtn.classList.remove('burger--active');
 			body.classList.remove('noscroll');
             event._isClicked = true;
-            console.log("Клик по ссылке");
+            // console.log("Клик по ссылке");
 		})
 	})
 };
@@ -312,7 +312,9 @@ initializeDisplay();
 
 window.addEventListener('resize', () => {
     const petCards = getPetsCards();
+
     displayList(postData, petCards, currentPage);
+    displayPagination(postData, petCards);
 });
 
 

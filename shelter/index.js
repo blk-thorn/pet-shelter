@@ -1,14 +1,3 @@
-// document.querySelector(".burger").addEventListener("click", function(){
-//     this.classList.toggle("burger--active")
-//     document.querySelector(".menu__list").classList.toggle("menu__list--active")
-//     document.querySelector("body").classList.toggle("noscroll")
-// });
-
-
-// document.querySelectorAll('.menu__item').addEventListener('click', function() {
-// this.classList.remove(("menu__list--active"))
-// document.querySelector(".burger").classList.remove("burger--active")
-// });
 
 const menu = document.querySelector('.menu__list');
 const menuBtn = document.querySelector('.burger');
@@ -267,41 +256,42 @@ body.addEventListener('click', (event) => {
     let currentCardCount;
 
 
-function updateCardCount() {
-    if (screenWidth < 768 && screenWidth >= 320) {
-        currentCardCount = 1;
-    } else if (screenWidth >= 768 && screenWidth <= 1279) {
-        currentCardCount = 2;
-    } else {
-        currentCardCount = 3;
+    function updateCardCount() {  
+         const screenWidth = window.innerWidth;
+        if (screenWidth < 768 && screenWidth >= 320) {
+            currentCardCount = 1;
+        } else if (screenWidth >= 768 && screenWidth <= 1279) {
+            currentCardCount = 2;
+        } else {
+            currentCardCount = 3;
+        }
     }
-}
-
-slider.addEventListener("animationend", (animationEvent) => {
-    let changedCards;
-    updateCardCount();
-
-    if (animationEvent.animationName === "move-left") {
-        slider.classList.remove("transition-left");
-        changedCards = leftCards;
-        activeCards.innerHTML = changedCards.innerHTML;
-
-        changedCards.innerHTML = "";
-
-        addUniqueCards(leftCards, currentCardCount);
-    } else {
-        slider.classList.remove("transition-right");
-        changedCards = rightCards;
-        activeCards.innerHTML = changedCards.innerHTML;
-
-        changedCards.innerHTML = "";
-
-        addUniqueCards(rightCards, currentCardCount);
-    }
-
-    prevBtn.addEventListener('click', moveLeft);
-    nextBtn.addEventListener('click', moveRight);
-});
+    
+    slider.addEventListener("animationend", (animationEvent) => {
+        let changedCards;
+        updateCardCount();
+    
+        if (animationEvent.animationName === "move-left") {
+            slider.classList.remove("transition-left");
+            changedCards = leftCards;
+            activeCards.innerHTML = changedCards.innerHTML;
+    
+            changedCards.innerHTML = "";
+    
+            addUniqueCards(leftCards, currentCardCount);
+        } else {
+            slider.classList.remove("transition-right");
+            changedCards = rightCards;
+            activeCards.innerHTML = changedCards.innerHTML;
+    
+            changedCards.innerHTML = "";
+    
+            addUniqueCards(rightCards, currentCardCount);
+        }
+    
+        prevBtn.addEventListener('click', moveLeft);
+        nextBtn.addEventListener('click', moveRight);
+    });
     
     const mediaQueryMobile = window.matchMedia('(min-width: 320px) and (max-width: 767px)');
     const mediaQueryTablet = window.matchMedia('(min-width: 768px) and (max-width: 1279px)');
@@ -312,8 +302,8 @@ slider.addEventListener("animationend", (animationEvent) => {
     }
 
     function handleMediaQueryChange() {
-        console.log('Ширина:', window.innerWidth);
-
+        // console.log('Ширина:', window.innerWidth);
+        
         if (mediaQueryMobile.matches) {
             updateCardDisplay();
         } else if (mediaQueryTablet.matches) {
