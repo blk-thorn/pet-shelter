@@ -33,12 +33,11 @@ if (menu && menuBtn) {
 body.addEventListener('click', (event) => {
     if( 
      event._isClicked === true ||
-    //  event.target.classList.contains('menu__list') == true ||
+     event.target.classList.contains('menu__list') == true ||
      event.target.classList.contains('menu__item-link') == true  ||
      event.target.classList.contains('burger') == true ||
      event.target.classList.contains('burger__line') == true
     ) return;
-    // console.log("Клик вне блока");
 
    menu.classList.remove('menu__list--active');
    menuBtn.classList.remove('burger--active');
@@ -220,18 +219,6 @@ body.addEventListener('click', (event) => {
  }
 
 
-//  function addUniqueCards(container, count, usedIndices) {
-//     while (usedIndices.size < count) {
-//         const index = Math.floor(Math.random() * shuffledArr.length);
-//         if (!usedIndices.has(index)) {
-//             usedIndices.add(index);
-//             const newCard = cardTemplate(shuffledArr, index);
-//             container.appendChild(newCard);
-//         }
-//     }
-// }
-
-
     const prevBtn = document.querySelector(".slider__btn--left");
     const nextBtn = document.querySelector(".slider__btn--right");
 
@@ -251,8 +238,7 @@ body.addEventListener('click', (event) => {
     nextBtn.addEventListener('click', moveRight);
 
 
-    // const usedLeftIndices = new Set();
-    // const usedRightIndices = new Set();
+
     let currentCardCount;
 
 
