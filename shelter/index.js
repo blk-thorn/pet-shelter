@@ -283,8 +283,9 @@ body.addEventListener('click', (event) => {
     const mediaQueryTablet = window.matchMedia('(min-width: 768px) and (max-width: 1279px)');
 
     function updateCardDisplay() {
-        updateCardCount();
-        addUniqueCards(currentCardCount);
+        updateCardCount(); 
+        const cards = activeCards;
+        addUniqueCards(cards, currentCardCount);
     }
 
     function handleMediaQueryChange() {
