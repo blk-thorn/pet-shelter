@@ -251,6 +251,7 @@ body.addEventListener('click', (event) => {
         } else {
             currentCardCount = 3;
         }
+        return currentCardCount;
     }
     
     slider.addEventListener("animationend", (animationEvent) => {
@@ -282,21 +283,35 @@ body.addEventListener('click', (event) => {
     const mediaQueryMobile = window.matchMedia('(min-width: 320px) and (max-width: 767px)');
     const mediaQueryTablet = window.matchMedia('(min-width: 768px) and (max-width: 1279px)');
 
+    function clearCardContainer(container) {
+        container.innerHTML = '';
+    }
+
+
     function updateCardDisplay() {
         updateCardCount(); 
-        const cards = activeCards;
-        addUniqueCards(cards, currentCardCount);
+
+                const activeCardContainer = activeCards;
+                const leftCardContainer = leftCards;
+                const rightCardContainer = rightCards;
+
+                clearCardContainer(activeCardContainer);
+                clearCardContainer(leftCardContainer);
+                clearCardContainer(rightCardContainer);
+
+                addUniqueCards(activeCards, currentCardCount);
+                addUniqueCards(leftCards, currentCardCount);
+                addUniqueCards(rightCards, currentCardCount);
     }
 
     function handleMediaQueryChange() {
-        // console.log('Ширина:', window.innerWidth);
         
         if (mediaQueryMobile.matches) {
             updateCardDisplay();
         } else if (mediaQueryTablet.matches) {
             updateCardDisplay();
         } else {
-            console.log('error');
+            updateCardDisplay();
         }
     }
 
