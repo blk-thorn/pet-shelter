@@ -149,44 +149,7 @@
 }
 
 @media (min-width: 768px) and (max-width: 1279px) {
-  .pets__slider {
-    display: flex;
-    /* right: 0; */
-    margin-left: 0px;
-    flex-direction: row;
-    gap: 40px;
-    /* column-gap: 40px; */
-    /* overflow: hidden; */
-    padding: 59.5px 0px;
-  }
 
-  @keyframes move-right {
-    from {
-      margin-left: 0px;
-    }
-    to {
-      margin-right: 1240px;
-    }
-  }
-
-  .transition-right {
-    animation-name: move-right;
-    animation-duration: 2s;
-  }
-
-  @keyframes move-left {
-    from {
-      margin-left: 0px;
-    }
-    to {
-      margin-right: -1240px;
-    }
-  }
-
-  .transition-left {
-    animation-name: move-left;
-    animation-duration: 2s;
-  }
 
   .slider__wrapper {
     display: flex;
@@ -296,12 +259,6 @@
     height: 113px;
   }
 
-  .left__cards,
-  .active__cards,
-  .right__cards {
-    display: flex;
-    gap: 40px;
-  }
 }
 @media (min-width: 670px) and (max-width: 767px) {
   .help__list {
@@ -666,7 +623,6 @@
 
   .pets {
     position: relative;
-    /* overflow-x: hidden; */
     padding-bottom: 41px;
   }
 
@@ -689,48 +645,6 @@
     overflow: hidden;
   }
 
-  .left__cards,
-  .active__cards,
-  .right__cards {
-    display: flex;
-    gap: 20px;
-  }
-
-  @keyframes move-right {
-    from {
-      margin-left: 0px;
-    }
-    to {
-      margin-right: 580px;
-    }
-  }
-
-  .transition-right {
-    animation-name: move-right;
-    animation-duration: 2s;
-  }
-
-  @keyframes move-left {
-    from {
-      margin-left: 0px;
-    }
-    to {
-      margin-right: -580px;
-    }
-  }
-
-  .transition-left {
-    animation-name: move-left;
-    animation-duration: 2s;
-  }
-  /* .left__cards,
-    .active__cards,
-    .right__cards {
-        display: flex;
-        gap: 10px;
-        z-index: 3;
-    
-    } */
 
   .slider__btn--left {
     position: absolute;
