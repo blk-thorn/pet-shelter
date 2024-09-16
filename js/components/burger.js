@@ -8,7 +8,7 @@ export function initBurgerMenu() {
     const toggle = () => {
         menu.classList.toggle('menu__list--active');
         burger.classList.toggle('burger--active');
-        body.classList.toggle('nos-croll');
+        body.classList.toggle('no-scroll');
     };
 
     burger.addEventListener('click', toggle);
